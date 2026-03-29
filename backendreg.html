@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color: lightblue;">
+
+<h2>Registration Form</h2>
+
+<form id="regForm" onsubmit="event.preventDefault(); handleRegister();">
+    <input type="text" id="name" placeholder="Enter Name" required><br>
+    <span class="error-message" id="nameError"></span><br>
+
+    <input type="text" id="email" placeholder="Enter Email"><br>
+    <span class="error-message" id="emailError"></span><br>
+
+    <input type="password" id="password" placeholder="Password"><br>
+    <span class="error-message" id="passwordError"></span><br>
+
+    <input type="password" id="confirmPassword" placeholder="Confirm Password"><br>
+    <span class="error-message" id="confirmError"></span><br>
+
+    <button type="submit">Register</button>
+</form>
+
+<div id="output"></div>
+
+</body>
+</html>
+<script>
+const users = [
+    {
+        id: 1,
+        name: "areeba",
+        email: "areeb9@gmail.com",
+        password: "11223344"
+    }
+];
+
+async function registerUser(name, email, password) {
+    try {
+        const userExists = await new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(users.find(u => u.email === email));
+            }, 500);
+        });
+
+        if (userExists) {
+            throw new Error("Email already registered.");
+        }
+
+        const newUser = { id: users.length + 1, name, email, password };
+        users.push(newUser);
+        const { password: pwd, ...safeUser } = newUser;
+        return { message: "Registration Successful!", user: safeUser };
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function handleRegister() {
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const confirmPassword = document.getElementById("confirmPassword").value.trim();
+
+    document.querySelectorAll(".error-message").forEach(el => el.innerText = "");
+    document.getElementById("output").innerText = "";
+
+    let hasError = false;
+
+    if (!name) {
+        document.getElementById("nameError").innerText = "Name is required.";
+        hasError = true;
+    }
+
+    if (!email) {
+        document.getElementById("emailError").innerText = "Email is required.";
+        hasError = true;
+    } else if (!email.includes("@")) {
+        document.getElementById("emailError").innerText = "Email must contain @ symbol.";
+        hasError = true;
+    }
+
+    if (!password) {
+        document.getElementById("passwordError").innerText = "Password is required.";
+        hasError = true;
+    } else if (password.length < 8) {
+        document.getElementById("passwordError").innerText = "Password must be at least 8 characters.";
+        hasError = true;
+    }
+
+    if (!confirmPassword) {
+        document.getElementById("confirmError").innerText = "Confirm password is required.";
+        hasError = true;
+    } else if (password !== confirmPassword) {
+        document.getElementById("confirmError").innerText = "Passwords do not match.";
+        hasError = true;
+    }
+
+    if (hasError) return;
+
+    try {
+        const result = await registerUser(name, email, password);
+        document.getElementById("output").innerText = result.message + "\n" + JSON.stringify(result.user, null, 2);
+    } catch (err) {
+        document.getElementById("output").innerText = err.message;
+    }
+}
+</script>
+
+</body>
+</html>
