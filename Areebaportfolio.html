@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Areeba Riaz | Digital Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-neon: #00f2ff;
+            --secondary-neon: #7000ff;
+            --bg-dark: #080808;
+            --glass: rgba(20, 20, 20, 0.85);
+            --text-light: #e0e0e0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; } /* Added for smooth internal jumping */
+
+        body { 
+            font-family: 'Space Grotesk', sans-serif; 
+            background-color: var(--bg-dark); 
+            color: var(--text-light); 
+            overflow-x: hidden;
+        }
+
+        /* --- STICKY NAVIGATION BAR --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(9, 95, 148, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary-neon);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-neon);
+            text-shadow: 0 0 10px var(--primary-neon);
+        }
+
+        /* --- SECTION STYLING --- */
+        section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 100px 20px 50px 20px; /* Top padding adjusted for nav bar */
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px;
+            border-radius: 40px;
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+            border-top: 4px solid var(--primary-neon);
+        }
+
+        .section-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary-neon), var(--secondary-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        h1 { font-size: 4rem; letter-spacing: -2px; margin-bottom: 10px; }
+        h2 { font-size: 2.2rem; color: var(--primary-neon); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        p { font-size: 1.1rem; line-height: 1.8; color: #b0b0b0; max-width: 700px; margin: 0 auto 20px auto; }
+
+        /* Background Images */
+        #intro { background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1510511459019-5dee997ddfdf?q=80&w=2000'); }
+        #education { background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2000'); }
+        #skills { background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000'); }
+        #dreams { background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000'); }
+        #hobbies { background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=2000'); }
+
+        .edu-track { border-left: 2px solid var(--secondary-neon); padding-left: 30px; margin-top: 30px; text-align: left; }
+        .step { margin-bottom: 30px; position: relative; }
+        .step::before { content: ''; position: absolute; left: -37px; top: 5px; width: 12px; height: 12px; background: var(--primary-neon); border-radius: 50%; box-shadow: 0 0 10px var(--primary-neon); }
+
+        .skill-box { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 20px; }
+        .chip { background: rgba(112, 0, 255, 0.1); border: 1px solid var(--secondary-neon); padding: 10px 25px; border-radius: 10px; font-weight: 500; transition: 0.3s; }
+        .chip:hover { background: var(--primary-neon); color: #000; box-shadow: 0 0 20px var(--primary-neon); }
+
+        .dream-quote { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; color: #fff; border-bottom: 2px solid var(--primary-neon); display: inline-block; padding-bottom: 5px; }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .contact-wrap { display: flex; justify-content: center; gap: 40px; margin-top: 30px; }
+        .contact-item { text-decoration: none; color: var(--text-light); transition: 0.3s; font-size: 1.2rem; }
+        .contact-item i { margin-right: 10px; color: var(--primary-neon); }
+        .contact-item:hover { color: var(--primary-neon); transform: translateY(-5px); }
+
+        @media (max-width: 768px) {
+            nav { padding: 0 20px; }
+            .nav-links { display: none; } /* Better to hide links on mobile or use a burger menu */
+            h1 { font-size: 2.5rem; }
+            .glass-card { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#intro" class="nav-logo">AREEBA.</a>
+        <div class="nav-links">
+            <a href="#intro">Intro</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#dreams">Dreams</a>
+            <a href="#hobbies">Hobbies</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section id="intro">
+        <div class="glass-card">
+            <div class="section-icon"><i class="fa-solid fa-terminal"></i></div>
+            <h2>System Initiated</h2>
+            <h1>Areeba Riaz</h1>
+            <p>Computer Science student by day, digital architect by night. I am exploring the infinite possibilities of code to build a smarter future.</p>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="glass-card">
+            <div class="section-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h2>My Academic Blueprint</h2>
+            <div class="edu-track">
+                <div class="step">
+                    <h3>Matriculation | Science</h3>
+                    <p>Where my analytical journey began, focusing on the core principles of the scientific world.</p>
+                </div>
+                <div class="step">
+                    <h3>Intermediate | ICS</h3>
+                    <p>The bridge between logic and technology. This is where I first shook hands with the world of computing.</p>
+                </div>
+                <div class="step" style="margin-bottom: 0;">
+                    <h3>Bachelor's | Computer Science</h3>
+                    <p>Currently evolving. Navigating through complex algorithms and building the foundation of my career.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="glass-card">
+            <div class="section-icon"><i class="fa-solid fa-code-merge"></i></div>
+            <h2>Technical Arsenal</h2>
+            <p>Every line of code is a step toward mastery. Here is my current tech stack and knowledge base.</p>
+            <div class="skill-box">
+                <div class="chip">Problem Solving</div>
+                <div class="chip">C++ & Logic</div>
+                <div class="chip">Web Architecture</div>
+                <div class="chip">System Analysis</div>
+                <div class="chip">UI/UX Design</div>
+                <div class="chip">Database Foundations</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dreams">
+        <div class="glass-card">
+            <div class="section-icon"><i class="fa-solid fa-rocket"></i></div>
+            <h2>Vision & Ambition</h2>
+            <p>My fuel is the desire for constant growth. I am seeking new knowledge about the vast digital world every single day.</p>
+            <div class="dream-quote">"To become a successful developer and a fiercely independent woman."</div>
+            <p style="margin-top: 25px;">I believe computers are more than machines; they are tools for empowerment and global change.</p>
+        </div>
+    </section>
+
+    <section id="hobbies">
+        <div class="glass-card">
+            <div class="section-icon"><i class="fa-solid fa-palette"></i></div>
+            <h2>The Creative Soul</h2>
+            <p>Balance is key. When I'm not debugging, I’m creating in the physical world.</p>
+            <div class="skill-box" style="margin-top: 10px;">
+                <div class="chip"><i class="fa-solid fa-paintbrush"></i> Painting & Sketching</div>
+                <div class="chip"><i class="fa-solid fa-leaf"></i> Gardening</div>
+                <div class="chip"><i class="fa-solid fa-book-open"></i> Book Reading</div>
+                <div class="chip"><i class="fa-solid fa-laptop-code"></i> Computing</div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2>Connect With Me</h2>
+        <div class="contact-wrap">
+            <a href="mailto:rareeba2005@gmail.com" class="contact-item">
+                <i class="fa-solid fa-envelope"></i> rareeba2005@gmail.com
+            </a>
+            <a href="https://www.instagram.com/areeba_riaz_18" target="_blank" class="contact-item">
+                <i class="fa-brands fa-instagram"></i> areeba_riaz_18
+            </a>
+        </div>
+        <p style="margin-top: 50px; font-size: 0.8rem; opacity: 0.4; letter-spacing: 1px;">
+            © 2026 AREEBA RIAZ | INDEPENDENT DEVELOPER
+        </p>
+    </footer>
+
+</body>
+</html>
