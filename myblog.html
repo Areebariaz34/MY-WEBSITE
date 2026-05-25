@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f0f0;
+        }
+
+        /* 1. The Banner-nav Container */
+        header {
+            position: relative; /* Acts as an anchor for the absolute image inside it */
+            height: 350px;       /* Set how tall you want your banner to be */
+            overflow: hidden;    /* Prevents the image from spilling out */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;  /* Puts nav at top, tagline at bottom */
+        }
+
+        /* 2. The Background Banner Image */
+        .banner-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;   /* Crops the photo nicely to fit the container */
+            z-index: 1;          /* Sits at the bottom layer */
+            filter: brightness(60%); /* Optional: Dims the image slightly so white text pops */
+        }
+
+        /* 3. The Top Navigation Layer */
+        .logo-and-nav {
+            position: relative;  /* Enables z-index stacking */
+            z-index: 2;          /* Sits ON TOP of the banner-bg */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Minimal text logo replacing the giant image logo */
+        .logo-text {
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Helps text readability */
+        }
+
+        /* 4. The Tagline Layer */
+        .hero-text {
+            position: relative;  /* Enables z-index stacking */
+            z-index: 2;          /* Sits ON TOP of the banner-bg */
+            padding: 40px;
+            text-align: center;
+        }
+
+        .hero-text p {
+            color: white;
+            font-size: 24px;
+            font-style: italic;
+            margin: 00px;
+            padding: 40px;
+            text-align: left;
+            font-family: 'Cinzel Decorative', sans-serif ;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        /* 5. Main Card Content below the banner */
+        section {
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cards {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 400px;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .container h4 {
+            margin: 0 0 10px 0;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .container p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.4;
+            margin: 0;
+        } 
+            /* second banner Styles */
+       
+        .second-banner{
+            position: relative; /* Z-index lagane ke liye anchor */
+            width: 100%;
+            height: 350px;      /* Banner ki height */
+            overflow: hidden;
+            display: flex;
+            align-items: center; /* Text ko vertically center karne ke liye */
+            justify-content: flex-start; /* Text ko left side par rakhne ke liye */
+            margin-top: 10px;
+        }
+            .second-banner-bg {
+                position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1; /* Image sabse neeche rahegi */
+            filter: brightness(55%);
+            }
+         .text {
+            position: relative; 
+            z-index: 2; /* Text ko image ke upar laane ke liye */
+            padding: 40px;
+            width: 100%;
+
+        }
+        .text p {
+            color: white;
+            font-size: 24px;
+            font-style: italic;
+            margin: 0;
+            text-align: right;
+            font-family: 'Cinzel Decorative', sans-serif;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+        }
+        /* Image Section Styles */
+        .image {
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* Images ke darmiyan ka gap */
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        .imgs {
+            position: relative; /* Text ko upar anchor karne ke liye */
+            flex: 1;            /* Charo boxes ko barabar width deta hai */
+            min-width: 220px;   /* Choti screen par size control karne ke liye */
+            height: 250px;      /* Images ki height */
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .imgs img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;  /* Photos bina stretch hue fit ho jayengi */
+            transition: transform 0.3s ease;
+        }
+        .img-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45); /* Black transparent layer taaki text saaf dikhe */
+            display: flex;
+            align-items: center;     /* Text vertically center */
+            justify-content: center;  /* Text horizontally center */
+            z-index: 2;
+        }
+        .img-text p {
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            padding: 20px;
+            font-family: 'Cinzel Decorative', sans-serif;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://static.vecteezy.com/system/resources/previews/030/060/464/non_2x/a-plate-of-spaghetti-with-meat-and-cheese-on-a-wooden-table-ai-generated-free-photo.jpg" alt="Spaghetti Banner" class="banner-bg">
+
+    <div class="logo-and-nav">
+      <div>
+        <span class="logo-text">FoodieBlog</span>
+      </div>
+      <div class="nav-links">
+        <nav>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#feedback">Feedback</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </div>
+    
+    <div class="hero-text">
+        <p>Chasing flavors around the world<br> 
+           Where every bite tells a story</p>
+    </div>
+  </header>
+
+  <section>
+     <div class="cards">
+        <img src="https://img.magnific.com/premium-photo/biryani-top-view-isolated-copy-space_198067-22542.jpg?w=2000" alt="Biryani" class="card-img">
+        <div class="container"> 
+          <h4><b>Karachi Biryani</b></h4>
+          <p>A delicious and aromatic rice dish layered with spiced chicken and vegetables.</p>
+        </div>
+     </div>
+     <div class="cards">
+        <img src="https://www.christinerecipe.com/wp-content/uploads/2025/06/jhony4a5_Capture_the_essence_of_This_Light_and_refreshing_Chick_d34d4072-4dd7-4650-adab-b61b62b044a5.png" alt="Karahi" class="card-img">
+        <div class="container"> 
+          <h4><b>chicken Karahi</b></h4>
+          <p>The ultimate Pakistani comfort food, known for its rich and flavorful sauce.</p>
+        </div>
+     </div>
+     <div class="cards">
+        <img src="https://i.pinimg.com/originals/7a/6e/83/7a6e8310ca1643b15fd7340ec76f6b8b.jpg" alt="Paya(Trotters)" class="card-img">
+        <div class="container"> 
+          <h4><b>Paya (Trotters)</b></h4>
+          <p>A traditional Pakistani dish made from cattle trotters, slow-cooked to perfection.</p>
+        </div>
+     </div>
+  </section>
+  <section>
+      <div class="second-banner">
+        <img src="https://static.vecteezy.com/system/resources/previews/046/705/366/large_2x/summer-bbq-food-table-with-hot-dog-and-hamburger-buffet-top-down-view-over-a-dark-slate-background-photo.jpg" alt="fast-food banner" class="second-banner-bg">    
+        <div class="text">
+            <p>Crafted by fire,<br> seasoned with love, <br>
+                served with passion.</p>
+         </div>
+      </div>
+  </section>
+  <section style="padding: 20px;text-align: center;"> 
+    <div class="image">
+        <div class="imgs">
+            <img src="https://180fitness.ca/wp-content/uploads/2020/03/burger.jpg" alt="fast-food img" class="image-bg">
+            <div class="img-text">
+                <p>Delicious burgers made with <br>fresh ingredients and served hot.</p>
+            </div>
+        </div>
+        <div class="imgs">
+            <img src="https://fullrecipy.com/wp-content/uploads/2024/03/FB_IMG_1710864085458.jpg" alt="fast-food img" class="image-bg">
+            <div class="img-text">
+                <p>Indulge in our crispy fries,<br> the perfect sidekick to your meal.</p>
+            </div>
+        </div>
+        <div class="imgs">
+            <img src="https://www.sharmispassions.com/wp-content/uploads/2012/07/chocolate-milkshake1.jpg" alt="fast-food img" class="image-bg">
+            <div class="img-text">
+                <p>Our signature milkshakes,<br>a sweet treat to complete<br> your dining experience.</p>
+            </div>
+        </div>
+        <div class="imgs">
+            <img src="https://somonday.com/wp-content/uploads/2025/02/crispy_golden_fried_chicken.jpg" alt="fast-food img" class="image-bg">
+            <div class="img-text">
+                <p>Experience the irresistible <br>taste of our crispy fried chicken,<br> seasoned to perfection.</p>
+            </div>
+    </div>
+  </section>
+  <footer>
+    <div class="feedback">
+        <h2 style="text-align: center;">We value your feedback!</h2>
+        <p style="text-align: center;">Please share your thoughts and suggestions to help us improve.</p>
+        <form style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+            <input type="text" placeholder="Your Name" style="padding: 10px; width: 300px; border-radius: 5px; border: 1px solid #ccc;">
+            <input type="email" placeholder="Your Email" style="padding: 10px; width: 300px; border-radius: 5px; border: 1px solid #ccc;">
+            <textarea placeholder="Your Feedback" rows="4" style="padding: 10px; width: 300px; border-radius: 5px; border: 1px solid #ccc;"></textarea
+            <button type="submit" style="padding: 10px 20px; background-color: #333; color: white; border: none; border-radius: 5px; cursor: pointer;">Submit</button>
+        </form>
+        <div class="contact us">
+            <h2 style="text-align: center; margin-top: 40px;">Contact Us</h2>
+            <p style="text-align: center;">Email:@foodieblog.com</p>
+            <p style="text-align: center;">Instagram: @foodieblog</p>
+        </div>
+    </div>
+  </footer>
+
+ </body>
+</html>
